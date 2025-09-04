@@ -1,0 +1,114 @@
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '683316271225759');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=683316271225759&ev=PageView&noscript=1"
+/></noscript>
+<style>
+.popup-notice {
+  position: fixed;
+  top: 50%; /* giữa chiều dọc */
+  left: 20px; /* sát bên trái */
+  transform: translateY(-50%); /* căn giữa theo chiều dọc */
+  background-color: #fff;
+  color: #000;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  animation: fadeInOut 5s ease-in-out;
+  max-width: 300px;
+}
+.popup-notice img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-60%); }
+  10% { opacity: 1; transform: translateY(-50%); }
+  90% { opacity: 1; transform: translateY(-50%); }
+  100% { opacity: 0; transform: translateY(-60%); }
+}
+</style>
+
+
+<script>
+const names = [
+  "Nguyễn Thị Lan - 4 phút trước Đã mua 3  ",
+  "Hồng Lê  - 2 phút trước Đã mua 3 ",
+  "Phạm Minh Anh -  10 phút trước Đã mua 2 ",
+  "Lê Thị Vân -  5 phút trước Đã mua 3 ",
+  "Lê Thị Vân Anh  -  2 phút trước Đã mua 4 ",
+  "Lê Thị Thắm -  5 phút trước Đã mua 2 ",
+  "Hoàng Thị Hương - 1 phút trước Đã mua 3 ",
+  "Trần Thị Mai - 7 phút trước Đã mua 3",
+  "Ngô Thị Yến - 3 phút trước Đã mua 4",
+  "Đặng Thị Nhung - 6 phút trước Đã mua 3"
+];
+
+const avatars = [
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/11.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/22.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/33.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/44.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/55.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/66.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/77.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/88.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/99.jpg",
+  "https://raw.githubusercontent.com/KhanhLK99/popup-assets/main/10.jpg"
+];
+
+let recentIndexes = [];
+
+function getUniqueRandomIndex(arrayLength) {
+  let index;
+  const maxAttempts = 10; // tránh vòng lặp vô hạn nếu danh sách quá ngắn
+  let attempts = 0;
+
+  do {
+    index = Math.floor(Math.random() * arrayLength);
+    attempts++;
+  } while (recentIndexes.includes(index) && attempts < maxAttempts);
+
+  // Lưu lại chỉ số này và giữ tối đa 4 phần tử
+  recentIndexes.push(index);
+  if (recentIndexes.length > 4) {
+    recentIndexes.shift(); // xóa phần tử cũ nhất
+  }
+
+  return index;
+}
+
+function showOrderNotice() {
+  const index = getUniqueRandomIndex(names.length);
+  const name = names[index];
+  const avatar = avatars[index % avatars.length]; // vòng lặp ảnh nếu thiếu
+
+  const notice = document.createElement("div");
+  notice.className = "popup-notice";
+  notice.innerHTML = `<img src="${avatar}" alt="avatar"><div>${name} Đầm !</div>`;
+  document.body.appendChild(notice);
+  setTimeout(() => notice.remove(), 5000);
+}
+
+setInterval(showOrderNotice, 6000);
+</script>
+<!-- End Meta Pixel Code -->
